@@ -4,12 +4,14 @@ DATE=$(date +%F:%H:%M:%S)
 LOGDIR=/home/centos/shellscript-logs
 
 SCRIPT_NAME=$0
-LOGFILE=$LOGDIR/$0-$DATE-log
+LOGFILE=$LOGDIR/$0-$DATE.log
 USERID=$(id -u)
+
 R="\e[31m]"
 G="\e[32m]"
 N="\e[0m]"
 Y="\e[33m]"
+
     if [ $USERID -ne 0 ]
     then 
     echo -e "$R ERROR: Please run this script with root acess $N"
@@ -17,12 +19,14 @@ Y="\e[33m]"
     exit 1
     
     fi
+    
     VALIDATION(){
 
         if [ $1 -ne 0 ]
 
         then 
             echo -e "Installing $2... $R Failure $N"
+            exit 1
 
         else
 
@@ -35,15 +39,16 @@ Y="\e[33m]"
     do 
     yum list installed $i &>> $LOGFILE
 
-    VALIDATE $? "$i"
-
     if [ S? -ne 0 ]
 
     then 
 
         echo "$i is not installed ,lets install it"
+        yum install $i -y &>>LOGFILE
+         VALIDATE $? "$i"
     else 
         echo -e "$Y $i is already installed $N"
 
     fi
+
     done
