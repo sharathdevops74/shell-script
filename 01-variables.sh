@@ -49,3 +49,4 @@ Y="\e[33m]"
             echo -e "Installing $2... $G success $N"
 
             VALIDATE $? "$i"
+            fi
