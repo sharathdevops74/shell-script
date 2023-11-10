@@ -32,7 +32,7 @@ Y="\e[33m]"
 
         echo "$i is not installed ,lets install it"
     else 
-        echo "$Y $i is already installed $N"
+        echo -e "$Y $i is already installed $N"
 
     fi
     done
