@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATE=$(date +%F:%H:%M:%S)
-LOGDIR= /home/centos/shellscript-logs
+LOGDIR=/home/centos/shellscript-logs
 
 SCRIPT_NAME=$0
 LOGFILE=$LOGDIR/$0-$DATE-log
@@ -17,26 +17,6 @@ Y="\e[33m]"
     exit 1
     
     fi
-
-
-
-    #all arguments are in $@
-
-    for i in $@
-    do 
-    yum list installed $i &>> $LOGFILE
-
-    if [ S? -ne 0 ]
-
-    then 
-
-        echo "$i is not installed ,lets install it"
-    else 
-        echo -e "$Y $i is already installed $N"
-
-    fi
-    done
-
     VALIDATION(){
 
         if [ $1 -ne 0 ]
@@ -48,5 +28,22 @@ Y="\e[33m]"
 
             echo -e "Installing $2... $G success $N"
 
-            VALIDATE $? "$i"
             fi
+    #all arguments are in $@
+
+    for i in $@
+    do 
+    yum list installed $i &>> $LOGFILE
+
+    VALIDATE $? "$i"
+
+    if [ S? -ne 0 ]
+
+    then 
+
+        echo "$i is not installed ,lets install it"
+    else 
+        echo -e "$Y $i is already installed $N"
+
+    fi
+    done
