@@ -19,7 +19,7 @@ Y="\e[33m"
     fi
 
     VALIDATE(){
-        if [ $1 -ne 0 ]
+        if [ $1 -ne 0 ];
         then 
             echo -e "Installing $2... $R Failure $N"
             exit 1
@@ -30,6 +30,7 @@ Y="\e[33m"
 
             fi
     }
+
     # all arguments are in $@
 
     for i in $@
@@ -45,6 +46,6 @@ Y="\e[33m"
          VALIDATE $? "$i"
     else 
         echo -e "$Y $i is already installed $N"
-
     fi
+    
     done
