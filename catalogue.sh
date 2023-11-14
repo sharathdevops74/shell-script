@@ -52,20 +52,20 @@ VALIDATE $? "installing dependencies"
 cp /home/centos/shell-script/catalogue.service /etc/systemd/system/catalogue.service  &>>$LOGFILE
 VALIDATE $? "copying catalogue.service"
 
-systemctl daemon-reload 
+systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? " daemon-reloaded"
 
-systemctl enable catalogue
+systemctl enable catalogue  &>>$LOGFILE
 VALIDATE $? "enabling catalogue"
 
-systemctl start catalogue
+systemctl start catalogue   &>>$LOGFILE
 VALIDATE $? "starting catalogue"
 
-cp /home/centos/shell-script/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/shell-script/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 VALIDATE $? " copying mongo repo"
 
-yum install mongodb-org-shell -y
+yum install mongodb-org-shell -y   &>>$LOGFILE
 VALIDATE $? " installing mongo client"
 
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js
+mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js   &>>$LOGFILE
 VALIDATE $? "loading catalogue data into mongodb"
