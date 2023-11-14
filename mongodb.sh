@@ -27,20 +27,20 @@ else
 fi
 }
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo  &>>LOGFILE
+cp mongo.repo /etc/yum.repos.d/mongo.repo  &>>$LOGFILE
 VALIDATE $? "copied mongodb repo into yum.repos.d"
 
-yum install mongodb-org -y   &>>LOGFILE
+yum install mongodb-org -y   &>>$LOGFILE
 VALIDATE $? "installing mogodb"
 
-systemctl enable mongod   &>>LOGFILE
+systemctl enable mongod   &>>$LOGFILE
 VALIDATE $? "enable mongodb"
 
-systemctl start mongod  &>>LOGFILE
+systemctl start mongod  &>>$LOGFILE
 VALIDATE $? "Start mongodb"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf  &>>LOGFILE
 VALIDATE $? " edited mongodb conf"
 
-systemctl restart mongod    &>>LOGFILE
+systemctl restart mongod    &>>$LOGFILE
 VALIDATE $? "restarting mongodb"
